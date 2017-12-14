@@ -1,2 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body{
+	color:#000;
+	background-color:#f4f6f6;
+}
+
+#container{
+	/*Styling for any element with the id="container" */
+	max-width:4.7in; /* The width is fixed by pixels */
+	max-height:11.5px; /* The height is fixed by pixels*/
+}
+
+.centre {
+    margin: auto;
+ }
+
+.neymo-icon {
+  padding: 0 14px;
+}
+
+.neymo-spacer {
+  flex: 1 1 auto;
+}

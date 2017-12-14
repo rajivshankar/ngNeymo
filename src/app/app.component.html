@@ -1,8 +1,15 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
+<div style="text-align:right">
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>{{ title }}</span>
+    <span class="neymo-spacer"></span>
+    <span>
+    	<button mat-icon-button routerLink="/">
+    		<mat-icon>home</mat-icon>
+    	</button>
+    </span>
+  </mat-toolbar-row>
+ </mat-toolbar>
 </div>
-<button mat-button>Click me!</button>
 <router-outlet></router-outlet>
