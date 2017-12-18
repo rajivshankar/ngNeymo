@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GoogleSignInComponent } from 'angular-google-signin';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/modules/shared.module';
+import { AuthService } from './auth.service';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -22,7 +24,8 @@ import { TransactionListComponent } from './transaction-list/transaction-list.co
     ActivityFeedComponent,
     VendorsComponent,
     CategoriesComponent,
-    TransactionListComponent
+    TransactionListComponent,
+    GoogleSignInComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,9 @@ import { TransactionListComponent } from './transaction-list/transaction-list.co
     BrowserAnimationsModule,
     SharedModule,
   ],
-  providers: [],
+  providers: [
+    AuthService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
