@@ -10,10 +10,10 @@ import { VendorsComponent } from './vendors/vendors.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent }, 
-  { path: 'activity-feed', component: ActivityFeedComponent }, 
-  { path: 'categories', component: CategoriesComponent }, 
-  { path: 'balance-info', component: BalanceInfoComponent }, 
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'activity-feed', component: ActivityFeedComponent },
+  { path: 'categories', component: CategoriesComponent },
+  { path: 'balance-info', component: BalanceInfoComponent },
   { path: 'transactions', component: TransactionListComponent },
   { path: 'vendors', component: VendorsComponent },
 ]

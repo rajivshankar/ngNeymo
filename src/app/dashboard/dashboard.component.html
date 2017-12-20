@@ -1,10 +1,7 @@
-<div *ngIf = "!isAuthenticated">
-  <google-signin
-    [clientId]="gClientId"
-    (googleSignInSuccess)="onGoogleSignInSuccess($event)">
-  </google-signin>
+<div *ngIf="!isAuthenticated">
+  <app-auth></app-auth>
 </div>
-<div *ngIf = "isAuthenticated">
+<div *ngIf="isAuthenticated">
   <mat-card class="example-card" routerLink='/balance-info' >
     <mat-card-header>
       <mat-card-title>Balance Information</mat-card-title>

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../auth.service';
-import {GoogleSignInSuccess } from 'angular-google-signin';
+import { PersistenceService} from 'angular-persistence';
+import { StorageType } from 'angular-persistence/src/constants/persistence.storage_type';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,25 +11,16 @@ import {GoogleSignInSuccess } from 'angular-google-signin';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  isAuthenticated = this.authService.isUserAuthenticated();
 
-  isAuthenticated: boolean = false; 
+  constructor(private authService: AuthService, private persistenceService: PersistenceService) { }
 
   ngOnInit() {
-	console.log('User Autheticated: ' + this.authService.isUserAuthenticated());
-	this.isAuthenticated = this.authService.isUserAuthenticated();
+    console.log('User Autheticated: ' + this.authService.isUserAuthenticated());
+    console.log('persistence isAuth: ' + this.authService.getGoogleUser()['isAuth']);
+    console.log('persistence googleId: ' + this.authService.getGoogleUser()['googleId']);
+    console.log('persistence googleEmail: ' + this.authService.getGoogleUser()['googleEmail']);
+    console.log('persistence googleName: ' + this.authService.getGoogleUser()['googleName']);
+    console.log('persistence googleImageUrl: ' + this.authService.getGoogleUser()['googleImageUrl']);
   }
-
-  onGoogleSignInSuccess(event: GoogleSignInSuccess) {
-	console.log("Sign in Success proxy");
-	this.authService.onGoogleSignInSuccess(event);
-	this.isAuthenticated = this.authService.isUserAuthenticated();
-  }
-
-  gWidth: number = this.authService.getGoogleWidth();
-  gHeight: number = this.authService.getGoogleHeight();
-  gTheme: string = this.authService.getGoogleTheme();
-  gScope: string = this.authService.getGoogleScope();
-  gDisplayLongTitle: boolean = this.authService.getGoogleLongTitle();
-  gClientId: string = this.authService.getClientId();
 }

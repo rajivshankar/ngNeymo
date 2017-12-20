@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GoogleSignInComponent } from 'angular-google-signin';
+import { PersistenceModule } from 'angular-persistence';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/modules/shared.module';
@@ -15,6 +16,7 @@ import { ActivityFeedComponent } from './activity-feed/activity-feed.component';
 import { VendorsComponent } from './vendors/vendors.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { TransactionListComponent } from './transaction-list/transaction-list.co
     CategoriesComponent,
     TransactionListComponent,
     GoogleSignInComponent,
+    AuthComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +36,7 @@ import { TransactionListComponent } from './transaction-list/transaction-list.co
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
+    PersistenceModule,
   ],
   providers: [
     AuthService,
