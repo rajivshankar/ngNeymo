@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GoogleSignInComponent } from 'angular-google-signin';
 import { PersistenceModule } from 'angular-persistence';
+import { NgxCarouselModule } from 'ngx-carousel';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/modules/shared.module';
@@ -17,6 +18,10 @@ import { VendorsComponent } from './vendors/vendors.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { AuthComponent } from './auth/auth.component';
+import { BalanceSummaryComponent } from './balance-summary/balance-summary.component';
+import { CategorySummaryComponent } from './category-summary/category-summary.component';
+import { VendorSummaryComponent } from './vendor-summary/vendor-summary.component';
+import { ActivityFeedSummaryComponent } from './activity-feed-summary/activity-feed-summary.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +34,10 @@ import { AuthComponent } from './auth/auth.component';
     TransactionListComponent,
     GoogleSignInComponent,
     AuthComponent,
+    BalanceSummaryComponent,
+    CategorySummaryComponent,
+    VendorSummaryComponent,
+    ActivityFeedSummaryComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +46,7 @@ import { AuthComponent } from './auth/auth.component';
     BrowserAnimationsModule,
     SharedModule,
     PersistenceModule,
+    NgxCarouselModule,
   ],
   providers: [
     AuthService,

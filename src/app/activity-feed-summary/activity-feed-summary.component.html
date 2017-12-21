@@ -1,0 +1,12 @@
+<ngx-carousel [inputs]="carouselBanner" [moveToSlide]="0" (onMove)="onmoveFn($event)" class="activityCarousel">
+
+  <ngx-item NgxCarouselItem class="bannerStyle" *ngFor="let Tile of carouselTileItems" routerLink='/activity-feed'>
+    <h4>{{Tile.title}}</h4>
+    <p>{{Tile.summary}}</p>
+  </ngx-item>
+
+  <div hidden=true>
+    <button NgxCarouselPrev class='leftRs'>&lt;</button>
+    <button NgxCarouselNext class='rightRs'>&gt;</button>
+  </div>
+</ngx-carousel>

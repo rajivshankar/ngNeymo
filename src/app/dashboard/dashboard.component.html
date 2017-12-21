@@ -2,53 +2,30 @@
   <app-auth></app-auth>
 </div>
 <div *ngIf="isAuthenticated">
-  <mat-card class="example-card" routerLink='/balance-info' >
-    <mat-card-header>
-      <mat-card-title>Balance Information</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-    	<ul>
-    		<li> Bank: </li>
-    		<li> Card: </li>
-    		<li> Wallet: </li>
-    		<li> Expenses: </li>
-    	</ul>
+  <mat-card class="dash-card" routerLink='/balance-info' >
+    <mat-card-content >
+      <app-balance-summary></app-balance-summary>
     </mat-card-content>
   </mat-card>
-  <mat-card class="example-card" routerLink='/activity-feed' >
-    <mat-card-header>
-      <mat-card-title>Activity Feed</mat-card-title>
-    </mat-card-header>
+  <mat-card class="dash-card" >
     <mat-card-content>
-    	<ul>
-    		<li> Feed 1 </li>
-    		<li> Feed 2 </li>
-    		<li> Feed 3 </li>
-    	</ul>
+      <app-activity-feed-summary></app-activity-feed-summary>
     </mat-card-content>
   </mat-card>
-  <mat-card class="example-card" routerLink='/vendors' >
+  <mat-card class="dash-card" routerLink='/vendors' >
     <mat-card-header>
-      <mat-card-title>Vendors</mat-card-title>
+      <mat-card-title><h4>Expenses by Vendor</h4></mat-card-title>
     </mat-card-header>
     <mat-card-content>
-    	<ul>
-    		<li> Vendor 1 </li>
-    		<li> vendor 2 </li>
-    		<li> vendor 3 </li>
-    	</ul>
+    	<app-vendor-summary></app-vendor-summary>
     </mat-card-content>
   </mat-card>
-  <mat-card class="example-card" routerLink='/categories' >
+  <mat-card class="dash-card" routerLink='/categories' >
     <mat-card-header>
-      <mat-card-title>Categories</mat-card-title>
+      <mat-card-title><h4>Expenses by Category</h4></mat-card-title>
     </mat-card-header>
     <mat-card-content>
-    	<ul>
-    		<li> Categories 1 </li>
-    		<li> Categories 2 </li>
-    		<li> Categories 3 </li>
-    	</ul>
+       <app-category-summary></app-category-summary>
     </mat-card-content>
   </mat-card>
 </div>
