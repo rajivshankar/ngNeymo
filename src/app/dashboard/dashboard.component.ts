@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { PersistenceService} from 'angular-persistence';
 import { StorageType } from 'angular-persistence/src/constants/persistence.storage_type';
+import { UtilsService } from '../utils.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +14,11 @@ export class DashboardComponent implements OnInit {
 
   isAuthenticated = this.authService.isUserAuthenticated();
 
-  constructor(private authService: AuthService, private persistenceService: PersistenceService) { }
+  constructor(
+    private authService: AuthService,
+    private persistenceService: PersistenceService,
+    private utilsService: UtilsService,
+  ) { }
 
   ngOnInit() {
     console.log('Client ID: ' + this.authService.getGoogleClientId());
@@ -23,5 +28,7 @@ export class DashboardComponent implements OnInit {
     console.log('persistence googleEmail: ' + this.authService.getGoogleUser()['googleEmail']);
     console.log('persistence googleName: ' + this.authService.getGoogleUser()['googleName']);
     console.log('persistence googleImageUrl: ' + this.authService.getGoogleUser()['googleImageUrl']);
+
+    this.utilsService.cancelBackButton();
   }
 }

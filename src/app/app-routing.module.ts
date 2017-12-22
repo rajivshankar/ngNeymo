@@ -7,6 +7,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { BalanceInfoComponent } from './balance-info/balance-info.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { VendorsComponent } from './vendors/vendors.component';
+import { AuthComponent } from './auth/auth.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'balance-info', component: BalanceInfoComponent },
   { path: 'transactions', component: TransactionListComponent },
   { path: 'vendors', component: VendorsComponent },
+  { path: 'signin', component: AuthComponent },
 ]
 
 @NgModule({

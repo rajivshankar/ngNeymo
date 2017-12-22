@@ -1,6 +1,11 @@
-<div>
-  <google-signin
-    [clientId]="gClientId"
-    (googleSignInSuccess)="onGoogleSignInSuccess($event)">
-  </google-signin>
+<div align="center">
+  <mat-card>
+    <mat-card-content>
+      <google-signin [clientId]="gClientId" (googleSignInSuccess)="onGoogleSignInSuccess($event)">
+      </google-signin>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click) = "onCancel()" *ngIf = "isAuthenticated">EXIT TO HOMESCREEN</button>
+    </mat-card-actions>
+  </mat-card>
 </div>

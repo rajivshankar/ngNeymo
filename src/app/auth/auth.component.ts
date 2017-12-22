@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 import { AuthService } from '../auth.service';
 import { GoogleSignInSuccess } from 'angular-google-signin';
@@ -12,7 +14,12 @@ import { StorageType } from 'angular-persistence/src/constants/persistence.stora
 })
 export class AuthComponent implements OnInit {
 
-  constructor(private authService: AuthService, private persistenceService: PersistenceService) { }
+  constructor(
+    private authService: AuthService,
+    private persistenceService: PersistenceService,
+    private router: Router,
+    private location: Location,
+  ) { }
 
   isAuthenticated = this.authService.isUserAuthenticated();
   gWidth = this.authService.getGoogleWidth();
@@ -39,5 +46,10 @@ export class AuthComponent implements OnInit {
     console.log('User Autheticated: ' + this.isAuthenticated);
     this.persistenceService.set('isAuth', true)
     console.log('persistence is auth after signin : ' + this.persistenceService.get('isAuth'));
+  }
+
+  onCancel() {
+    console.log('Exitting');
+    this.router.navigate(['dashboard']);
   }
 }

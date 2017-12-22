@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { PersistenceService} from 'angular-persistence';
 import { StorageType } from 'angular-persistence/src/constants/persistence.storage_type';
 import { Router } from '@angular/router';
+import { UtilsService } from './utils.service';
 
 @Component({
   selector: 'app-root',
@@ -13,12 +14,19 @@ export class AppComponent {
   title = 'neymo';
 
   private isAuthenticated = this.persistenceService.get('isAuth', StorageType.LOCAL);
+  private activateBackButton = false;
 
   constructor(
     private authService: AuthService,
     private persistenceService: PersistenceService,
-    private router: Router
+    private router: Router,
+    private utilsService: UtilsService,
   ) {}
+
+  ngOnInit() {
+    this.activateBackButton = this.utilsService.getDisplayBackButton();
+    console.log('ngOnInit in app component: ' + this.activateBackButton);
+  }
 
   disconnectUser() {
     console.log('sign out pressed');
@@ -27,5 +35,9 @@ export class AppComponent {
     console.log('persistence isAuth: ' + this.persistenceService.get('isAuth', StorageType.LOCAL));
     this.router.navigate(['']);
     console.log(this.router)
+  }
+
+  goBack() {
+    this.utilsService.goBack();
   }
 }

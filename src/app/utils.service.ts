@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Injectable()
 export class UtilsService {
+
+  private displayBackButton = false;
+  private currPage: Location;
 
   accountIcons = {
     'bank': { 'icon': 'account_balance', 'title': 'Available Balance' },
@@ -33,6 +37,25 @@ export class UtilsService {
 
   getCategoryColor(name: string): string {
     return this.categoryIcons[name.toLowerCase()]['color'];
+  }
+
+  goBack(): void {
+    this.currPage.back();
+  }
+
+  setLocation(currPage: Location) {
+    this.displayBackButton = true;
+    this.currPage = currPage;
+    console.log('In Set Location (Button): ' + this.displayBackButton);
+  }
+
+  cancelBackButton() {
+    this.displayBackButton = false;
+    console.log('In cancelBackButton (display): ' + this.displayBackButton);
+  }
+
+  getDisplayBackButton(): boolean {
+    return this.displayBackButton;
   }
 
 }
