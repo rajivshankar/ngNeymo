@@ -1,5 +1,3 @@
-p {
-  /* cellpadding */
-  padding: 3px;
-  margin: 3px;
+.mat-card-title {
+  margin-bottom: 2px;
 }

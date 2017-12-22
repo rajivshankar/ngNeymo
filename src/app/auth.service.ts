@@ -14,7 +14,8 @@ export class AuthService {
   private googleUser: gapi.auth2.GoogleUser;
   private auth2: gapi.auth2.GoogleAuth;
 
-  private myClientId = '1050419459269-cq7ah0d49167gvf7trql7u23sg9a2qci.apps.googleusercontent.com';
+  // private myClientId = '1050419459269-cq7ah0d49167gvf7trql7u23sg9a2qci.apps.googleusercontent.com';
+  private myClientId = '507328679535-59d0pcp70bn90p42mej12au9f842emjj.apps.googleusercontent.com';
 
   private isAuthenticated = this.persistenceService.get('isAuth', StorageType.LOCAL);
   // private isAuthenticated = false;
@@ -77,6 +78,10 @@ export class AuthService {
 
   getGoogleTheme(): string {
     return this.myTheme;
+  }
+
+  getGoogleClientId(): string {
+    return this.myClientId;
   }
 
   resetIsAuthenticated(resetFlag: boolean = false): void {

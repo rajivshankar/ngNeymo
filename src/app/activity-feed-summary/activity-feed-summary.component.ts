@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxCarousel, NgxCarouselStore } from 'ngx-carousel';
+import { NeymoDataService } from '../neymo-data.service';
+import { ActivityFeedRecord } from '../neymoMetaData';
+import { UtilsService } from '../utils.service';
 
 @Component({
   selector: 'app-activity-feed-summary',
@@ -8,20 +11,16 @@ import { NgxCarousel, NgxCarouselStore } from 'ngx-carousel';
 })
 export class ActivityFeedSummaryComponent implements OnInit {
 
-  public carouselTileItems: Array<any>;
+  private activityFeed: ActivityFeedRecord[];
   public carouselBanner: NgxCarousel;
 
-  constructor() { }
+  constructor(
+    private neymoDataService: NeymoDataService,
+    private utilsService: UtilsService,
+  ) { }
 
   ngOnInit() {
-    // this.carouselTileItems = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-    this.carouselTileItems = [
-      { 'title': 'ActivityFeed 1', 'summary': 'This is activity Feed 1. Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ...' },
-      { 'title': 'ActivityFeed 2', 'summary': 'This is activity Feed 2. Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ...' },
-      { 'title': 'ActivityFeed 3', 'summary': 'This is activity Feed 3. Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ...' },
-      { 'title': 'ActivityFeed 4', 'summary': 'This is activity Feed 4. Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ...' },
-      { 'title': 'ActivityFeed 5', 'summary': 'This is activity Feed 5. Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ...' },
-    ];
+    this.getActivityFeed();
 
     this.carouselBanner = {
       grid: { xs: 1, sm: 1, md: 1, lg: 1, all: 0 },
@@ -59,7 +58,12 @@ export class ActivityFeedSummaryComponent implements OnInit {
       loop: true,
       touch: true,
       easing: 'ease',
-    }
+    };
+  }
+
+  getActivityFeed(): void {
+    this.neymoDataService.getActivityFeed()
+      .subscribe(activityFeed => this.activityFeed = activityFeed);
   }
 
   /* It will be triggered on every slide*/

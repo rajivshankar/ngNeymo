@@ -1,8 +1,7 @@
 <ngx-carousel [inputs]="carouselBanner" [moveToSlide]="0" (onMove)="onmoveFn($event)" class="activityCarousel">
 
-  <ngx-item NgxCarouselItem class="bannerStyle" *ngFor="let Tile of carouselTileItems" routerLink='/activity-feed'>
-    <h4>{{Tile.title}}</h4>
-    <p>{{Tile.summary}}</p>
+  <ngx-item NgxCarouselItem class="bannerStyle" *ngFor="let activityFeedItem of activityFeed" routerLink='/activity-feed'>
+    <p><strong>{{ activityFeedItem.title }}: </strong>{{ activityFeedItem.summary }}</p>
   </ngx-item>
 
   <div hidden=true>

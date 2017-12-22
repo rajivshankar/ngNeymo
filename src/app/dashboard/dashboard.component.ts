@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   constructor(private authService: AuthService, private persistenceService: PersistenceService) { }
 
   ngOnInit() {
+    console.log('Client ID: ' + this.authService.getGoogleClientId());
     console.log('User Autheticated: ' + this.authService.isUserAuthenticated());
     console.log('persistence isAuth: ' + this.authService.getGoogleUser()['isAuth']);
     console.log('persistence googleId: ' + this.authService.getGoogleUser()['googleId']);

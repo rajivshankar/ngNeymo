@@ -1,32 +1,12 @@
 <mat-grid-list cols="3" rowHeight="100px">
-  <mat-grid-tile>
+  <mat-grid-tile *ngFor = "let categoryRecord of categorySummary">
     <span style="text-align: center">
-      <button mat-icon-button routerLink="/categories">
-        <mat-icon>shopping_cart</mat-icon>
+      <button mat-icon-button color = "{{ getCategoryColor(categoryRecord.categoryName) }}" routerLink="/categories">
+        <mat-icon>{{ getCategoryIcon(categoryRecord.categoryName) }}</mat-icon>
       </button>
       <br>
-      <p style="text-align: center">Shopping</p>
-      <p style="text-align: center">Rs. 34,000</p>
-    </span>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <span style="text-align: center">
-      <button mat-icon-button color="primary" routerLink="/categories">
-        <mat-icon>local_movies</mat-icon>
-      </button>
-      <br>
-      <p style="text-align: center">Entertainment</p>
-      <p style="text-align: center">Rs. 10,000</p>
-    </span>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <span style="text-align: center">
-      <button mat-icon-button color="warn" routerLink="/categories">
-        <mat-icon>flight_takeoff</mat-icon>
-      </button>
-      <br>
-      <p style="text-align: center">Travel</p>
-      <p style="text-align: center">Rs. 7,000</p>
+      <p style="text-align: center">{{ categoryRecord.categoryName }}</p>
+      <p style="text-align: center">{{ categoryRecord.amount | indianCurrency }}</p>
     </span>
   </mat-grid-tile>
 </mat-grid-list>

@@ -23,3 +23,13 @@ body{
 .neymo-spacer {
   flex: 1 1 auto;
 }
+
+p {
+  /* cellpadding */
+  padding: 0px;
+  margin: 1px;
+}
+
+.mat-card-title {
+  margin-bottom: 0px;
+}
