@@ -10,7 +10,6 @@ import { VendorsComponent } from './vendors/vendors.component';
 import { AuthComponent } from './auth/auth.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'activity-feed', component: ActivityFeedComponent },
   { path: 'categories', component: CategoriesComponent },
@@ -18,6 +17,7 @@ const routes: Routes = [
   { path: 'transactions', component: TransactionListComponent },
   { path: 'vendors', component: VendorsComponent },
   { path: 'signin', component: AuthComponent },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
 ]
 
 @NgModule({

@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from './auth.service';
-import { PersistenceService} from 'angular-persistence';
 import { StorageType } from 'angular-persistence/src/constants/persistence.storage_type';
-import { Router } from '@angular/router';
-import { UtilsService } from './utils.service';
+import { Location } from '@angular/common';
+import { neymoHomePath, appTitle } from './neymoMetaData';
 
 @Component({
   selector: 'app-root',
@@ -11,33 +10,22 @@ import { UtilsService } from './utils.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'neymo';
-
-  private isAuthenticated = this.persistenceService.get('isAuth', StorageType.LOCAL);
-  private activateBackButton = false;
+  title = appTitle;
+  private backBtnVisible  = true;
 
   constructor(
     private authService: AuthService,
-    private persistenceService: PersistenceService,
-    private router: Router,
-    private utilsService: UtilsService,
+    private location: Location,
   ) {}
 
-  ngOnInit() {
-    this.activateBackButton = this.utilsService.getDisplayBackButton();
-    console.log('ngOnInit in app component: ' + this.activateBackButton);
-  }
-
-  disconnectUser() {
-    console.log('sign out pressed');
-    this.authService.resetIsAuthenticated();
-    console.log('User Autheticated: ' + this.authService.isUserAuthenticated());
-    console.log('persistence isAuth: ' + this.persistenceService.get('isAuth', StorageType.LOCAL));
-    this.router.navigate(['']);
-    console.log(this.router)
-  }
-
   goBack() {
-    this.utilsService.goBack();
+    console.log('Current URL: ' + this.location.path());
+    if (this.location.path() !== neymoHomePath) {
+      this.location.back();
+    }
+  }
+
+  onActivate(component: Component) {
+    this.backBtnVisible = (this.location.path() !== neymoHomePath);
   }
 }

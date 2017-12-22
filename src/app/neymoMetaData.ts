@@ -20,3 +20,6 @@ export class ActivityFeedRecord {
   title: string;
   summary: string;
 }
+
+export const neymoHomePath = '/dashboard';
+export const appTitle = 'neymo';

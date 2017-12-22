@@ -2,6 +2,11 @@
 <div style="text-align:right">
 <mat-toolbar color="primary">
   <mat-toolbar-row>
+    <span>
+      <button mat-icon-button (click) = "goBack()" *ngIf="backBtnVisible">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </span>
     <span>{{ title }}</span>
     <span class="neymo-spacer"></span>
     <span>
@@ -20,4 +25,4 @@
   </mat-toolbar-row>
 </mat-toolbar>
 </div>
-<router-outlet></router-outlet>
+<router-outlet (activate)="onActivate($event)"></router-outlet>
