@@ -32,7 +32,10 @@ export class BalanceSummaryComponent implements OnInit {
 
   getBalanceSummary(): void {
     this.neymoDataService.getBalanceSummary()
-      .subscribe(balanceSummary => this.balanceSummary = balanceSummary);
+      .subscribe(balanceSummary => {
+        this.balanceSummary = balanceSummary;
+        console.log('balance Summary length = ' + this.balanceSummary.length);
+      });
   }
 
 }

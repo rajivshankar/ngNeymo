@@ -11,7 +11,7 @@ import { StorageType } from 'angular-persistence/src/constants/persistence.stora
 })
 export class DashboardComponent implements OnInit {
 
-  isAuthenticated = this.authService.isUserAuthenticated();
+  private isAuthenticated: boolean;
 
   constructor(
     private authService: AuthService,
@@ -19,6 +19,8 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.isAuthenticated = this.authService.isUserAuthenticated();
+
     console.log('Client ID: ' + this.authService.getGoogleClientId());
     console.log('User Autheticated: ' + this.authService.isUserAuthenticated());
     console.log('persistence isAuth: ' + this.authService.getGoogleUser()['isAuth']);
@@ -26,5 +28,9 @@ export class DashboardComponent implements OnInit {
     console.log('persistence googleEmail: ' + this.authService.getGoogleUser()['googleEmail']);
     console.log('persistence googleName: ' + this.authService.getGoogleUser()['googleName']);
     console.log('persistence googleImageUrl: ' + this.authService.getGoogleUser()['googleImageUrl']);
+  }
+
+  setIsAuthenticated(flag = true): void {
+    this.isAuthenticated = flag;
   }
 }

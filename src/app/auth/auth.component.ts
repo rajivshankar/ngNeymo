@@ -14,6 +14,8 @@ import { StorageType } from 'angular-persistence/src/constants/persistence.stora
 })
 export class AuthComponent implements OnInit {
 
+  private isFirstEntry: boolean; // to enable user to be able to change the google user
+
   constructor(
     private authService: AuthService,
     private persistenceService: PersistenceService,
@@ -37,6 +39,7 @@ export class AuthComponent implements OnInit {
     console.log('persistence googleEmail: ' + this.authService.getGoogleUser()['googleEmail']);
     console.log('persistence googleName: ' + this.authService.getGoogleUser()['googleName']);
     console.log('persistence googleImageUrl: ' + this.authService.getGoogleUser()['googleImageUrl']);
+    this.isFirstEntry = true;
   }
 
   onGoogleSignInSuccess(event: GoogleSignInSuccess) {
@@ -46,10 +49,14 @@ export class AuthComponent implements OnInit {
     console.log('User Autheticated: ' + this.isAuthenticated);
     this.persistenceService.set('isAuth', true)
     console.log('persistence is auth after signin : ' + this.persistenceService.get('isAuth'));
+    if (!this.isFirstEntry) {
+      this.onCancel();
+    }
+    this.isFirstEntry = false;
   }
 
   onCancel() {
-    console.log('Exitting');
-    this.router.navigate(['dashboard']);
+    console.log('Exiting');
+    this.location.back();
   }
 }

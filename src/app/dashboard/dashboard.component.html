@@ -2,16 +2,20 @@
   <app-auth></app-auth>
 </div>
 <div *ngIf="isAuthenticated">
-  <mat-card class="dash-card" routerLink='/balance-info' >
-    <mat-card-content >
-      <app-balance-summary></app-balance-summary>
-    </mat-card-content>
-  </mat-card>
-  <mat-card class="dash-card" >
+  <app-balance-summary></app-balance-summary>
+  <mat-card class="dash-card">
     <mat-card-content>
       <app-activity-feed-summary></app-activity-feed-summary>
     </mat-card-content>
   </mat-card>
+  <mat-chip-list>
+    <span class="neymo-spacer"></span>
+    <span>
+      <mat-chip class="message-chip" color="accent" selected="true">
+        <h4>Today's Spend: {{ 9000 | indianCurrency }}</h4>
+      </mat-chip>
+    </span>
+  </mat-chip-list>
   <mat-card class="dash-card" routerLink='/vendors' >
     <mat-card-header>
       <mat-card-title><h4>Expenses by Vendor</h4></mat-card-title>

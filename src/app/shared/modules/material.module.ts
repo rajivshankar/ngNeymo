@@ -5,6 +5,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { NgModule } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule( {
   imports: [
@@ -15,6 +16,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatMenuModule,
     MatGridListModule,
   ],
+  MatChipsModule,
   exports: [
     MatButtonModule,
     MatIconModule,
@@ -22,6 +24,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatToolbarModule,
     MatMenuModule,
     MatGridListModule,
+    MatChipsModule,
   ],
 })
 export class MaterialModule { }

@@ -1,7 +1,7 @@
-<mat-grid-list cols="3" rowHeight="100px">
+<mat-grid-list *ngIf="balanceSummary" cols="{{ balanceSummary.length }}">
   <mat-grid-tile *ngFor = "let balSumRec of balanceSummary">
       <span style="text-align: center">
-        <button mat-mini-fab color="primary" routerLink="/balance-info">
+        <button mat-mini-fab color="primary" class="balance-button" routerLink="/balance-info">
           <mat-icon>{{ getAccountIcon(balSumRec.acClass) }}</mat-icon>
         </button><br>
         <p style="text-align: center">{{ balSumRec.acClass }}</p>
