@@ -8,6 +8,7 @@ import { BalanceInfoComponent } from './balance-info/balance-info.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { VendorsComponent } from './vendors/vendors.component';
 import { AuthComponent } from './auth/auth.component';
+import { neymoHomePath } from './neymoMetaData';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'transactions', component: TransactionListComponent },
   { path: 'vendors', component: VendorsComponent },
   { path: 'signin', component: AuthComponent },
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: neymoHomePath, pathMatch: 'full' },
+  { path: '**', redirectTo: neymoHomePath, pathMatch: 'full' },
 ]
 
 @NgModule({

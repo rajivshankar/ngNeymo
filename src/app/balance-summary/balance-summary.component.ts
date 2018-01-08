@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NeymoDataService } from '../neymo-data.service';
 import { BalanceSummaryRecord } from '../neymoMetaData';
 import { UtilsService } from '../utils.service';
+import { truncate } from 'fs';
 
 @Component({
   selector: 'app-balance-summary',
@@ -31,10 +32,12 @@ export class BalanceSummaryComponent implements OnInit {
   }
 
   getBalanceSummary(): void {
-    this.neymoDataService.getBalanceSummary()
-      .subscribe(balanceSummary => {
-        this.balanceSummary = balanceSummary;
+    this.neymoDataService.getBackendData(this.neymoDataService.balanceSummaryUrl, true)
+      .subscribe(report => {
+        this.balanceSummary = report['results'][0].data;
         console.log('balance Summary length = ' + this.balanceSummary.length);
+        console.log('balance Summary = ' + JSON.stringify(this.balanceSummary));
+        // console.log('report = ' + JSON.stringify(report));
       });
   }
 

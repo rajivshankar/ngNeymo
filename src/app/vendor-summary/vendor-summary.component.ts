@@ -31,8 +31,11 @@ export class VendorSummaryComponent implements OnInit {
   }
 
   getVendorSummary(): void {
-    this.neymoDataService.getVendorSummary()
-      .subscribe(vendorSummary => this.vendorSummary = vendorSummary);
+    this.neymoDataService.getBackendData(this.neymoDataService.vendorSummaryUrl, true)
+      .subscribe(vendorSummary => {
+        console.log('Vendor Summary = ' + JSON.stringify(vendorSummary['results'][0].data.slice(0, 3)));
+        this.vendorSummary = vendorSummary['results'][0].data.slice(0, 3);
+      });
   }
 
 }

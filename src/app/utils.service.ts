@@ -16,6 +16,8 @@ export class UtilsService {
     'groceries': { 'icon': 'local_grocery_store', 'color': 'primary' },
     'travel': { 'icon': 'flight_takeoff', 'color': 'accent' },
     'shopping': { 'icon': 'shopping_cart', 'color': 'primary' },
+    'unknown': { 'icon': 'all_inclusive', 'color': 'primary' },
+    'self': { 'icon': 'account_circle', 'color': 'accent' },
   };
 
   constructor() {}

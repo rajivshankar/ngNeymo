@@ -32,13 +32,13 @@ export class AuthComponent implements OnInit {
   gClientId = this.authService.getClientId();
 
   ngOnInit() {
-    console.log('auth.component');
+    console.log('auth.component - On Init');
     console.log('User Autheticated: ' + this.authService.isUserAuthenticated());
-    console.log('persistence isAuth: ' + this.authService.getGoogleUser()['isAuth']);
-    console.log('persistence googleId: ' + this.authService.getGoogleUser()['googleId']);
-    console.log('persistence googleEmail: ' + this.authService.getGoogleUser()['googleEmail']);
-    console.log('persistence googleName: ' + this.authService.getGoogleUser()['googleName']);
-    console.log('persistence googleImageUrl: ' + this.authService.getGoogleUser()['googleImageUrl']);
+    console.log('isAuth: ' + this.authService.getGoogleUser()['isAuth']);
+    console.log('googleId: ' + this.authService.getGoogleUser()['googleId']);
+    console.log('googleEmail: ' + this.authService.getGoogleUser()['googleEmail']);
+    console.log('googleName: ' + this.authService.getGoogleUser()['googleName']);
+    console.log('googleImageUrl: ' + this.authService.getGoogleUser()['googleImageUrl']);
     this.isFirstEntry = true;
   }
 
@@ -47,8 +47,8 @@ export class AuthComponent implements OnInit {
     this.authService.onGoogleSignInSuccess(event);
     this.isAuthenticated = this.authService.isUserAuthenticated();
     console.log('User Autheticated: ' + this.isAuthenticated);
-    this.persistenceService.set('isAuth', true)
-    console.log('persistence is auth after signin : ' + this.persistenceService.get('isAuth'));
+    this.persistenceService.set('isAuth', this.isAuthenticated, { type: StorageType.LOCAL });
+    console.log('persistence isAuth after signin : ' + this.persistenceService.get('isAuth', StorageType.LOCAL));
     if (!this.isFirstEntry) {
       this.onCancel();
     }

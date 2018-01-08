@@ -1,11 +1,11 @@
 <mat-grid-list cols="3" rowHeight="100px">
   <mat-grid-tile *ngFor = "let categoryRecord of categorySummary">
     <span style="text-align: center">
-      <button mat-icon-button color = "{{ getCategoryColor(categoryRecord.categoryName) }}" routerLink="/categories">
-        <mat-icon>{{ getCategoryIcon(categoryRecord.categoryName) }}</mat-icon>
+      <button mat-icon-button color = "{{ getCategoryColor(categoryRecord.category) }}" routerLink="/categories">
+        <mat-icon>{{ getCategoryIcon(categoryRecord.category) }}</mat-icon>
       </button>
       <br>
-      <p style="text-align: center">{{ categoryRecord.categoryName }}</p>
+      <p style="text-align: center">{{ categoryRecord.category }}</p>
       <p style="text-align: center">{{ categoryRecord.amount | indianCurrency }}</p>
     </span>
   </mat-grid-tile>

@@ -1,11 +1,11 @@
-<mat-grid-list *ngIf="balanceSummary" cols="{{ balanceSummary.length }}">
+<mat-grid-list *ngIf="balanceSummary" cols="{{ balanceSummary.length }}" rowHeight="110px">
   <mat-grid-tile *ngFor = "let balSumRec of balanceSummary">
       <span style="text-align: center">
         <button mat-mini-fab color="primary" class="balance-button" routerLink="/balance-info">
-          <mat-icon>{{ getAccountIcon(balSumRec.acClass) }}</mat-icon>
+          <mat-icon>{{ getAccountIcon(balSumRec.bal_type) }}</mat-icon>
         </button><br>
-        <p style="text-align: center">{{ balSumRec.acClass }}</p>
-        <p style="text-align: center">{{ balSumRec.balance | indianCurrency }}</p>
+        <p style="text-align: center">{{ balSumRec.bal_type }}</p>
+        <p style="text-align: center">{{ balSumRec.avl_bal | indianCurrency }}</p>
       </span>
   </mat-grid-tile>
 </mat-grid-list>

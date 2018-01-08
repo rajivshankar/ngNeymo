@@ -3,22 +3,29 @@ import { GoogleSignInSuccess } from 'angular-google-signin';
 
 import { PersistenceService } from 'angular-persistence';
 import { StorageType } from 'angular-persistence/src/constants/persistence.storage_type';
+import { NeymoUser, neymoHomePath } from './neymoMetaData';
+import { NumberSymbol } from '@angular/common/src/i18n/locale_data_api';
+import { NeymoDataService } from './neymo-data.service';
+import { truncate } from 'fs';
+
+const defaultDeviceId = 'web';
+const defaultUuid = 'web';
 
 @Injectable()
 export class AuthService {
 
-  constructor(private persistenceService: PersistenceService) {
-    // this.resetIsAuthenticated(); // remove comment to reset user
-  }
+  constructor(
+    private neymoDataService: NeymoDataService,
+    private persistenceService: PersistenceService
+  ) { }
 
-  private googleUser: gapi.auth2.GoogleUser;
-  private auth2: gapi.auth2.GoogleAuth;
+  // private auth2: gapi.auth2.GoogleAuth;
 
-  // private myClientId = '1050419459269-cq7ah0d49167gvf7trql7u23sg9a2qci.apps.googleusercontent.com';
-  private myClientId = '507328679535-59d0pcp70bn90p42mej12au9f842emjj.apps.googleusercontent.com';
+  private myClientId = '1050419459269-cq7ah0d49167gvf7trql7u23sg9a2qci.apps.googleusercontent.com'; // NEYMO client ID
 
   private isAuthenticated = this.persistenceService.get('isAuth', StorageType.LOCAL);
   // private isAuthenticated = false;
+  private currentNeymoUser: NeymoUser;
 
   private myWidth = 50;
   private myHeight = 50;
@@ -27,20 +34,67 @@ export class AuthService {
   private myTheme = 'dark';
 
   onGoogleSignInSuccess(event: GoogleSignInSuccess) {
-    this.googleUser = event.googleUser;
-    let id: string = this.googleUser.getId();
-    let profile: gapi.auth2.BasicProfile = this.googleUser.getBasicProfile();
-    console.log('ID: ' +
-      profile
-        .getId()); // Do not send to your backend! Use an ID token instead.
+    const googleUser: gapi.auth2.GoogleUser = event.googleUser;
+    const googleIdToken: string = googleUser.getAuthResponse().id_token;
+    // const id: string = googleUser.getId();
+    const profile: gapi.auth2.BasicProfile = googleUser.getBasicProfile();
+    const neymoAuthToken = this.persistenceService.get('neymoAuthToken', StorageType.LOCAL);
+    console.log('ID: ' + profile.getId());
     console.log('email: ' + profile.getEmail());
     console.log('Name: ' + profile.getName());
-    this.persistenceService.set('googleId', profile.getId(), { type: StorageType.LOCAL });
-    this.persistenceService.set('googleEmail', profile.getEmail(), { type: StorageType.LOCAL });
-    this.persistenceService.set('googleName', profile.getName(), { type: StorageType.LOCAL });
-    this.persistenceService.set('googleImageUrl', profile.getImageUrl(), { type: StorageType.LOCAL });
-    this.persistenceService.set('isAuth', this.googleUser.isSignedIn() , {type: StorageType.LOCAL});
+    console.log('ID Token: ' + googleIdToken);
+    // this.resetIsAuthenticated(); // remove comment to reset user
+    this.persistenceService.set(
+      'googleId',
+      profile.getId(),
+      { type: StorageType.LOCAL }
+    );
+    this.persistenceService.set(
+      'googleEmail',
+      profile.getEmail(),
+      { type: StorageType.LOCAL }
+    );
+    this.persistenceService.set(
+      'googleName',
+      profile.getName(),
+      { type: StorageType.LOCAL }
+    );
+    this.persistenceService.set(
+      'googleImageUrl',
+      profile.getImageUrl(),
+      { type: StorageType.LOCAL }
+    );
+    this.persistenceService.set(
+      'isAuth',
+      googleUser.isSignedIn(),
+      { type: StorageType.LOCAL }
+    );
+    // this.persistenceService.set('googleToken', googleUser.getAuthResponse().id_token, { type: StorageType.LOCAL });
+
+    if (!neymoAuthToken) {
+      console.log('neymoAuthToken: ' + neymoAuthToken);
+      this.createDefaultUser();
+      this.currentNeymoUser.google_user_token = googleIdToken;
+      console.log('Before POST: ');
+      console.log(this.currentNeymoUser);
+      this.getNeymoUser();
+    }
+
     this.isAuthenticated = this.persistenceService.get('isAuth', StorageType.LOCAL);
+  }
+
+  getNeymoUser(): void {
+    this.neymoDataService.postDeviceDetails(this.currentNeymoUser)
+      .subscribe(neymoUser => {
+        this.currentNeymoUser = neymoUser;
+        console.log('Neymo User: ' + JSON.stringify(this.currentNeymoUser));
+        this.persistenceService.set(
+          'neymoUserToken',
+          this.currentNeymoUser.auth_token,
+          { type: StorageType.LOCAL }
+        );
+        console.log('Auth Token persistence: ' + this.persistenceService.get('neymoUserToken', StorageType.LOCAL));
+      });
   }
 
   disconnecUser() {
@@ -53,7 +107,8 @@ export class AuthService {
   }
 
   isUserAuthenticated (): boolean {
-    return this.isAuthenticated;
+    // return this.isAuthenticated;
+    return this.persistenceService.get('neymoUserToken', StorageType.LOCAL) ? true : false;
   }
 
   getClientId(): string {
@@ -99,4 +154,18 @@ export class AuthService {
     };
   }
 
+  getGoogleToken() {
+    return (this.persistenceService.get('googleToken', StorageType.LOCAL));
+  }
+
+  createDefaultUser(): void {
+    this.currentNeymoUser = new (NeymoUser);
+    this.currentNeymoUser.device_id = defaultDeviceId;
+    this.currentNeymoUser.uuid = defaultUuid;
+    console.log(JSON.stringify(this.currentNeymoUser));
+  }
+
+  getNeymoUserToken(): string {
+    return this.currentNeymoUser.auth_token;
+  }
 }

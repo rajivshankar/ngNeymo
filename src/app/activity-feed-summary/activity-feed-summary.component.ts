@@ -62,8 +62,12 @@ export class ActivityFeedSummaryComponent implements OnInit {
   }
 
   getActivityFeed(): void {
-    this.neymoDataService.getActivityFeed()
-      .subscribe(activityFeed => this.activityFeed = activityFeed);
+    this.neymoDataService.getBackendData(this.neymoDataService.activityFeedUrl)
+      .subscribe(activityFeed => {
+        this.activityFeed = activityFeed['results'];
+        console.log('Activity Feed = ' + JSON.stringify(activityFeed));
+
+      });
   }
 
   /* It will be triggered on every slide*/

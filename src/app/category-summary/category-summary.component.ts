@@ -30,8 +30,11 @@ export class CategorySummaryComponent implements OnInit {
   }
 
   getCategorySummary(): void {
-    this.neymoDataService.getCategorySummary()
-      .subscribe(categorySummary => this.categorySummary = categorySummary);
+    this.neymoDataService.getBackendData(this.neymoDataService.categorySummaryUrl, true)
+      .subscribe(categorySummary => {
+        // console.log('Category Summary = ' + JSON.stringify(categorySummary['results'][0].data.slice(0, 3)));
+        this.categorySummary = categorySummary['results'][0].data.slice(0, 3);
+      });
   }
 
 }
